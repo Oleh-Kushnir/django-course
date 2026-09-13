@@ -1,13 +1,14 @@
 from django.contrib import admin
-from users.models import User, EmailVerification
+
 from products.admin import BasketAdmin
-# Register your models here.
-# admin.site.register(User)
+from users.models import EmailVerification, User
+
 
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
     list_display = ('username', 'email', 'is_staff')
     inlines = [BasketAdmin]
+
 
 @admin.register(EmailVerification)
 class EmailVerificationAdmin(admin.ModelAdmin):

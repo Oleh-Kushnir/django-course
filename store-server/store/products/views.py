@@ -1,24 +1,16 @@
-from django.db.models import QuerySet
-from django.http import HttpResponseRedirect
-from django.shortcuts import render
-
 from django.contrib.auth.decorators import login_required
-from unicodedata import category
-
-from products.models import Products, ProductCategory, Basket
-from users.models import User
-
-from django.core.paginator import Paginator
-
+from django.http import HttpResponseRedirect
 from django.views.generic.base import TemplateView
 from django.views.generic.list import ListView
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from common.views import TitleMixin
+from products.models import Basket, ProductCategory, Products
+
 
 class IndexView(TitleMixin, TemplateView):
     template_name = 'products/index.html'
     title = 'Store'
+
 
 class ProductListView(TitleMixin, ListView):
     model = Products
@@ -37,11 +29,10 @@ class ProductListView(TitleMixin, ListView):
         return context
 
 
-
 @login_required
-def basket_add(request,product_id):
+def basket_add(request, product_id):
     product = Products.objects.get(id=product_id)
-    basket =Basket.objects.filter(user=request.user, product=product)
+    basket = Basket.objects.filter(user=request.user, product=product)
 
     if not basket.exists():
         Basket.objects.create(user=request.user, product=product, quantity=1)
@@ -52,8 +43,9 @@ def basket_add(request,product_id):
 
     return HttpResponseRedirect(request.META['HTTP_REFERER'])
 
+
 @login_required
-def basket_remove(request,basket_id):
+def basket_remove(request, basket_id):
     basket = Basket.objects.get(id=basket_id)
     basket.delete()
     return HttpResponseRedirect(request.META['HTTP_REFERER'])
