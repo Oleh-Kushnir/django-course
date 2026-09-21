@@ -30,5 +30,5 @@ class EmailVerification(models.Model):
             message=message,
             from_email='from@example',
             recipient_list=[self.user.email],
-            fail_silently=False,
+            fail_silently=True,
         )
