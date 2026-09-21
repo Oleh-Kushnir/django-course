@@ -46,6 +46,6 @@ A scalable, full-featured e-commerce platform engineered with **Django** and **D
 | **Payments** | Stripe API, Stripe Webhooks |
 | **Auth & Security** | OAuth2, Session/Basic Auth, Token Verification |
 | **Code Standards** | Flake8, django-environ 
-| **Frontend:** Django Templates, HTML5, CSS3, Bootstrap, JavaScript/jQuery|
+| **Frontend:** | Django Templates, HTML5, CSS3, Bootstrap, JavaScript/jQuery|
 
 ---
